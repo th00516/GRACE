@@ -15,6 +15,7 @@ RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime && \
     R -e 'install.packages(c("BiocManager", "devtools"))' && \
     R -e 'BiocManager::install(c("Seurat", "SingleR", "monocle", "org.Hs.eg.db", "glmGamPoi"))' && \
     R -e 'devtools::install_github("chris-mcginnis-ucsf/DoubletFinder")' && \
+    R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/reticulate/reticulate_1.24.tar.gz")' && \
     R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/rvcheck/rvcheck_0.1.8.tar.gz")' && \
     R -e 'BiocManager::install("clusterProfiler")' && \
     R -e 'install.packages(c("anndata", "hdf5r", "shinyWidgets", "DT"))' && \
