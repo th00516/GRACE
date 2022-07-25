@@ -5,7 +5,7 @@ RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime && \
     sed -i s/security.debian.org/mirrors.tuna.tsinghua.edu.cn/g /etc/apt/sources.list && \
     apt update && \
     apt install -y --no-install-recommends python3-dev r-base-dev && \
-    apt install -y --no-install-recommends libhdf5-dev libxml2-dev libssl-dev libcurl4-openssl-dev && \
+    apt install -y --no-install-recommends libhdf5-dev libxml2-dev libssl-dev libcurl4-openssl-dev libhdf5-dev libxml2-dev libssl-dev libcurl4-openssl-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev && \
     apt install -y --no-install-recommends python3-pip sqlite3 && \
     python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy==1.19.5 && \
     python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple scipy==1.7.3 && \
@@ -21,5 +21,3 @@ RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime && \
     apt autoremove && apt clean && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/*
-
-COPY grace /opt/grace
