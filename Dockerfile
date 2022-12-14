@@ -11,6 +11,7 @@ RUN ln -sf /usr/share/zoneinfo/UTC /etc/localtime && \
     apt install -y --no-install-recommends python3-pip sqlite3 file && \
     python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple numpy==1.19.5 && \
     python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple scipy==1.7.3 && \
+    python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple markupsafe==2.0.1 && \
     python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple Cython && \
     python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple cellphonedb && \
     python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple leidenalg && \
