@@ -39,7 +39,7 @@ RUN cd /root && \
     wget 'https://repo.anaconda.com/miniconda/Miniconda3-py39_23.1.0-1-Linux-x86_64.sh' && \
     bash ./Miniconda3-py39_23.1.0-1-Linux-x86_64.sh -b && \
     rm -f Miniconda3-py39_23.1.0-1-Linux-x86_64.sh && \
-    . '/root/miniconda3/etc/profile.d/conda.sh' && \
+    source '/root/miniconda3/etc/profile.d/conda.sh' && \
     conda init bash && \
     ########
 
