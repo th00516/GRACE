@@ -1,0 +1,124 @@
+core.inter_cellcall.act.exec_cellcall <- function(dbpath, data.id, D, C_type, args.list) {
+  
+  run_cellcall <- function(mtx, cell_type.list, out_dir, args_lst) {
+    
+    mtx <- as.data.frame(Matrix::as.matrix(mtx))
+
+    cell_type.list <- gsub('_', '.', cell_type.list)
+    cell_type.list <- gsub('\\+', '.H.', cell_type.list)
+    cell_type.list <- gsub('\\-', '.L.', cell_type.list)
+    
+    colnames(mtx) <- paste(colnames(mtx), cell_type.list, sep = '_')
+    
+    species <- args_lst[[1]]
+    padjust <- as.numeric(args_lst[[2]])
+    
+    
+    cellcallObj <- CreateNichConObject(data = mtx,
+                                       min.feature = 3,
+                                       names.field = 2,
+                                       source = 'UMI',
+                                       scale.factor = 10^4,
+                                       Org = species)
+    
+    
+    cellcallObj <- TransCommuProfile(object = cellcallObj,
+                                     pValueCor = 0.05,
+                                     CorValue = 0.25,
+                                     topTargetCor = 1,
+                                     p.adjust = padjust,
+                                     use.type = 'mean',
+                                     method = 'weighted',
+                                     IS_core = T,
+                                     Org = species)
+    
+    
+    n <- cellcallObj@data$expr_l_r_log2_scale
+    
+    pathway.list <- lapply(colnames(n), function(i) {
+      
+      tmp <- getHyperPathway(data = n, object = cellcallObj, cella_cellb = i, Org = species)
+      
+      
+      return(tmp)
+      
+    })
+    
+    names(pathway.list) <- colnames(cellcallObj@data$expr_l_r_log2_scale)
+    
+    
+    saveRDS(cellcallObj, file.path(out_dir, 'cellcallObj.rds'))
+    saveRDS(pathway.list, file.path(out_dir, 'pathway.list.rds'))
+    
+  }
+  
+  
+  
+  
+  withProgress({
+    
+    incProgress(0.0, message = 'Initializing')
+    
+    
+    con <- dbConnect(RSQLite::SQLite(), dbpath)
+    
+    path <- dbGetQuery(
+      con, paste0('SELECT DATAPATH FROM data_records WHERE DATA_ID == "', data.id, '"')
+    )
+    
+    dbDisconnect(con)
+    
+    
+    
+    
+    incProgress(0.1, message = 'Preparing')
+    
+    
+    D <- D[, D$var$isUsed]
+    
+    
+    dir_path <- paste0(substr(path$DATAPATH, start = 1, stop = nchar(path$DATAPATH) -  5), '.running')
+    
+    
+    
+    
+    incProgress(0.3, message = 'CellCall Running')
+    
+    
+    if (!('Group 2' %in% unique(D$var$Group))) {
+      
+      cellcall_path.1 <- file.path(getwd(), dir_path, 'cellcall', 'g1')
+      dir.create(cellcall_path.1, recursive = T)
+      
+      
+      
+      run_cellcall(D$X, D$var[[C_type]], cellcall_path.1, args.list)
+      
+    }
+    
+    
+    if ('Group 2' %in% unique(D$var$Group)) {
+      
+      cellcall_path.1 <- file.path(getwd(), dir_path, 'cellcall', 'g1')
+      dir.create(cellcall_path.1, recursive = T)
+      
+      cellcall_path.2 <- file.path(getwd(), dir_path, 'cellcall', 'g2')
+      dir.create(cellcall_path.2, recursive = T)
+      
+      ad1 <- D[, D$var$Group == 'Group 1']
+      ad2 <- D[, D$var$Group == 'Group 2']
+      
+      run_cellcall(ad1$X, ad1$var[[C_type]], cellcall_path.1, args.list)
+      run_cellcall(ad2$X, ad2$var[[C_type]], cellcall_path.2, args.list)
+      
+    }
+    
+    
+    
+    
+    incProgress(1.0, message = 'Finished')
+    
+  })
+  
+  
+}
