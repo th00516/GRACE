@@ -65,6 +65,7 @@ custom_channels:\n\
     conda activate base && \
 
     ########
+    conda install -y zip && \
     conda install -y hdf5 && \
     conda install -y cmake && \
     ########

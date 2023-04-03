@@ -16,7 +16,8 @@ core.data_upload.act.get_data <- function(proj.id, data.id) {
                                
                                  incProgress(0.2, message = 'Compressing')
                                  zip(file, c(paste0(path.base, '.h5ad'),
-                                             paste0(path.base, '.running')))
+                                             paste0(path.base, '.running')),
+                                     zip = 'zip')
                                  
                                  
                                  incProgress(1.0, message = 'Finished')

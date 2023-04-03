@@ -17,7 +17,8 @@ core.defined_subcluster.act.get_data <- function(proj.id, data.id, grp.id) {
                                
                                  incProgress(0.2, message = 'Compressing')
                                  zip(file, c(paste0(path.base, '.', grp.id, '.h5ad'),
-                                             paste0(path.base, '.', grp.id, '.running')))
+                                             paste0(path.base, '.', grp.id, '.running')),
+                                     zip = 'zip')
                                  
                                  
                                  incProgress(1.0, message = 'Finished')
