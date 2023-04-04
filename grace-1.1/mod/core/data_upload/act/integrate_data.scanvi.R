@@ -1,4 +1,6 @@
 library(Seurat)
+library(reticulate)
+
 
 scvi <- import('scvi')
 
