@@ -1,5 +1,4 @@
 *.Rmd
 *.rds
 grace-1.1/dbs/*
-grace-1.1/utils/*
 grace-1.1/work/*
