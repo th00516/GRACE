@@ -112,8 +112,11 @@ core.intra_cellchat <- function(input, output) {
   
   
   ## TABLE ##
-  candidate_pathways <- reactive(core.intra_cellchat.act.pick_pathways(DBPATH(), GRP.ID(),
-                                                                       GRP.ID()))
+  candidate_pathways <- eventReactive(c(T, input$intra_cellchat_ctl_exec_1), {
+    
+    core.intra_cellchat.act.pick_pathways(DBPATH(), GRP.ID(), GRP.ID())
+    
+  })
   
   output$intra_cellchat_tab_pathway <- renderUI(
     core.intra_cellchat.ctl.attr_picker.mutable('intra_cellchat_tab_pathway', 'Actived Pathway',

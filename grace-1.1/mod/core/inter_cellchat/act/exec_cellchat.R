@@ -94,33 +94,20 @@ core.inter_cellchat.act.exec_cellchat <- function(dbpath, data.id, D, C_type, ar
     incProgress(0.3, message = 'CellChat Running')
     
     
-    if (!('Group 2' %in% unique(D$var$Group))) {
-      
-      cellchat_path.1 <- file.path(getwd(), dir_path, 'cellchat', 'g1')
-      dir.create(cellchat_path.1, recursive = T)
-      
-      
-      
-      run_cellchat(D, C_type, cellchat_path.1, args.list)
-      
-    }
+    cellchat_path.1 <- file.path(getwd(), dir_path, 'cellchat', 'g1')
+    dir.create(cellchat_path.1, recursive = T)
     
+    cellchat_path.2 <- file.path(getwd(), dir_path, 'cellchat', 'g2')
+    dir.create(cellchat_path.2, recursive = T)
     
-    if ('Group 2' %in% unique(D$var$Group)) {
-      
-      cellchat_path.1 <- file.path(getwd(), dir_path, 'cellchat', 'g1')
-      dir.create(cellchat_path.1, recursive = T)
-      
-      cellchat_path.2 <- file.path(getwd(), dir_path, 'cellchat', 'g2')
-      dir.create(cellchat_path.2, recursive = T)
-      
-      ad1 <- D[, D$var$Group == 'Group 1']
-      ad2 <- D[, D$var$Group == 'Group 2']
-      
+    ad1 <- D[, D$var$Group == 'Group 1']
+    ad2 <- D[, D$var$Group == 'Group 2']
+    
+    if (ncol(ad1) > 100)
       run_cellchat(ad1, C_type, cellchat_path.1, args.list)
+    
+    if (ncol(ad2) > 100)
       run_cellchat(ad2, C_type, cellchat_path.2, args.list)
-      
-    }
     
     
     

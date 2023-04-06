@@ -1,8 +1,8 @@
 core.intra_cellcall.act.exec_cellcall <- function(dbpath, grp.id, D, C_type, args.list) {
   
-  run_cellcall <- function(mtx, cell_type.list, out_dir, args_lst) {
+  run_cellcall <- function(data, cell_type.list, out_dir, args_lst) {
     
-    mtx <- as.data.frame(Matrix::as.matrix(mtx))
+    mtx <- as.data.frame(Matrix::as.matrix(data$copy()$X))
     
     cell_type.list <- gsub('_', '.', cell_type.list)
     cell_type.list <- gsub('\\+', '.H.', cell_type.list)
@@ -84,20 +84,6 @@ core.intra_cellcall.act.exec_cellcall <- function(dbpath, grp.id, D, C_type, arg
     
     incProgress(0.3, message = 'CellCall Running')
     
-    
-    if (!('Group 2' %in% unique(D$var$Group))) {
-      
-      cellcall_path.1 <- file.path(getwd(), dir_path, 'cellcall', 'g1')
-      dir.create(cellcall_path.1, recursive = T)
-      
-      
-      
-      run_cellcall(D$X, D$var[[C_type]], cellcall_path.1, args.list)
-      
-    }
-    
-    
-    if ('Group 2' %in% unique(D$var$Group)) {
       
       cellcall_path.1 <- file.path(getwd(), dir_path, 'cellcall', 'g1')
       dir.create(cellcall_path.1, recursive = T)
@@ -108,10 +94,11 @@ core.intra_cellcall.act.exec_cellcall <- function(dbpath, grp.id, D, C_type, arg
       ad1 <- D[, D$var$Group == 'Group 1']
       ad2 <- D[, D$var$Group == 'Group 2']
       
-      run_cellcall(ad1$X, ad1$var[[C_type]], cellcall_path.1, args.list)
-      run_cellcall(ad2$X, ad2$var[[C_type]], cellcall_path.2, args.list)
+      if (ncol(ad1) > 100)
+        run_cellcall(ad1, ad1$var[[C_type]], cellcall_path.1, args.list)
       
-    }
+      if (ncol(ad2) > 100)
+        run_cellcall(ad2, ad2$var[[C_type]], cellcall_path.2, args.list)
     
     
     
