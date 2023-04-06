@@ -103,10 +103,10 @@ core.intra_cellchat.act.exec_cellchat <- function(dbpath, grp.id, D, C_type, arg
     ad1 <- D[, D$var$Group == 'Group 1']
     ad2 <- D[, D$var$Group == 'Group 2']
     
-    if (ncol(ad1) > 100)
+    if (ncol(ad1) > 100 & C_type %in% ad1$var_keys())
       run_cellchat(ad1, C_type, cellchat_path.1, args.list)
     
-    if (ncol(ad2) > 100)
+    if (ncol(ad2) > 100 & C_type %in% ad2$var_keys())
       run_cellchat(ad2, C_type, cellchat_path.2, args.list)
     
     

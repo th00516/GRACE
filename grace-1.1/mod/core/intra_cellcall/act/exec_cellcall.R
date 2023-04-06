@@ -8,6 +8,7 @@ core.intra_cellcall.act.exec_cellcall <- function(dbpath, grp.id, D, C_type, arg
     cell_type.list <- gsub('\\+', '.H.', cell_type.list)
     cell_type.list <- gsub('\\-', '.L.', cell_type.list)
     
+    colnames(mtx) <- gsub('_', '.', colnames(mtx))
     colnames(mtx) <- paste(colnames(mtx), cell_type.list, sep = '_')
     
     species <- args_lst[[1]]
@@ -84,21 +85,21 @@ core.intra_cellcall.act.exec_cellcall <- function(dbpath, grp.id, D, C_type, arg
     
     incProgress(0.3, message = 'CellCall Running')
     
-      
-      cellcall_path.1 <- file.path(getwd(), dir_path, 'cellcall', 'g1')
-      dir.create(cellcall_path.1, recursive = T)
-      
-      cellcall_path.2 <- file.path(getwd(), dir_path, 'cellcall', 'g2')
-      dir.create(cellcall_path.2, recursive = T)
-      
-      ad1 <- D[, D$var$Group == 'Group 1']
-      ad2 <- D[, D$var$Group == 'Group 2']
-      
-      if (ncol(ad1) > 100)
-        run_cellcall(ad1, ad1$var[[C_type]], cellcall_path.1, args.list)
-      
-      if (ncol(ad2) > 100)
-        run_cellcall(ad2, ad2$var[[C_type]], cellcall_path.2, args.list)
+    
+    cellcall_path.1 <- file.path(getwd(), dir_path, 'cellcall', 'g1')
+    dir.create(cellcall_path.1, recursive = T)
+    
+    cellcall_path.2 <- file.path(getwd(), dir_path, 'cellcall', 'g2')
+    dir.create(cellcall_path.2, recursive = T)
+    
+    ad1 <- D[, D$var$Group == 'Group 1']
+    ad2 <- D[, D$var$Group == 'Group 2']
+    
+    if (ncol(ad1) > 100 & C_type %in% ad1$var_keys())
+      run_cellcall(ad1, ad1$var[[C_type]], cellcall_path.1, args.list)
+    
+    if (ncol(ad2) > 100 & C_type %in% ad2$var_keys())
+      run_cellcall(ad2, ad2$var[[C_type]], cellcall_path.2, args.list)
     
     
     
