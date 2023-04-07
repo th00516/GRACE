@@ -46,6 +46,8 @@ core.data_upload.act.integrate_data <- function(dbpath, proj.id, data.ids) {
         
         D <- anndata::read_h5ad(path.list[[x]])
         D <- D[, D$var$isUsed]
+        
+        colnames(D) <- paste(colnames(D), x, sep = '_')
 
         obj <- CreateSeuratObject(counts = D$X)
         obj[['Ident']] <- D$var$Ident

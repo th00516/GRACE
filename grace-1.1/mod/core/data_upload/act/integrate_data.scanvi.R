@@ -47,6 +47,8 @@ core.data_upload.act.integrate_data <- function(dbpath, proj.id, data.ids) {
         D <- anndata::read_h5ad(path.list[[x]])
         D <- D[, D$var$isUsed]
 
+        colnames(D) <- paste(colnames(D), x, sep = '_')
+        
         obj <- CreateSeuratObject(counts = D$X)
         obj[['Ident']] <- D$var$Ident
         obj[['Group']] <- D$var$Group
@@ -77,7 +79,7 @@ core.data_upload.act.integrate_data <- function(dbpath, proj.id, data.ids) {
       adata <- sceasy::convertFormat(obj, from = 'seurat', to = 'anndata', main_layer = 'counts', drop_single_values = F)
       
       
-      scvi$model$SCANVI$setup_anndata(adata, batch_key = 'Ident')
+      scvi$model$SCANVI$setup_anndata(adata, batch_key = 'Ident', labels_key = 'Group', unlabeled_category = 'orig.ident')
       model <- scvi$model$SCANVI(adata)
       model$train()
       
