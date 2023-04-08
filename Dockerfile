@@ -169,6 +169,8 @@ options(BioC_mirror="https://mirrors.tuna.tsinghua.edu.cn/bioconductor")\
 
     conda activate cellphonedb && \
     conda install -y r-essentials && \
+    R -e 'install.packages("pheatmap")' && \
+    pip install markupsafe==2.0.1 && \
     pip install cellphonedb && \
     cellphonedb database download --version v3.0.0 && \
     conda deactivate && \
