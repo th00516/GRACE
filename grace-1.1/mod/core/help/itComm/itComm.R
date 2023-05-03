@@ -2,7 +2,7 @@
 itComm.help <- fluidPage(
   fixedRow(
     column(width = 11,
-           h3('Inter-type communication'), br(),
+           h3('Inter-type Communication'), br(),
            
            p(style = 'word-break:break-word',
              '
@@ -11,18 +11,6 @@ itComm.help <- fluidPage(
              In this method, only the interaction pairs that pass a certain threshold for expression level or number of cells expressing the specific interactors in the respective cell populations are selected for the downstream analysis. 
              ', tags$b('"Intra-type communication"'), ' module implements CellphoneDB (', a('https://pypi.org/project/CellPhoneDB/'), ') to score the interactions by calculating the product of average receptor and average ligand expression in the corresponding cell types. 
              The active interaction pairs must assess the statistical significance of each interaction score. ', tags$b('"Intra-type communication"'), ' module also supports users to investigate every known ligand-receptor pair, and quickly plot publication-ready images.
-             '
-           ),
-           
-           p(style = 'word-break:break-word',
-             '
-             添加CellCall描述
-             '
-           ),
-           
-           p(style = 'word-break:break-word',
-             '
-             添加CellChat描述
              '
            ),
            

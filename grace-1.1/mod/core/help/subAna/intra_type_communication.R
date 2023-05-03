@@ -2,7 +2,7 @@
 intra_type_communication.help <- fluidPage(
   fixedRow(
     column(width = 11,
-           h3('Intra-type communication'), br(),
+           h3('Intra-type Communication'), br(),
            
            p(style = 'word-break:break-word',
              '
@@ -10,18 +10,6 @@ intra_type_communication.help <- fluidPage(
              such as tissue ecosystem, and immune response of microenvironment mediated by ligand-receptor complexes. 
              GRACE implements CellPhoneDB to infer the intra-type cell-cell communication networks cross many cell subtypes. 
              The detailed information about statistical instructions is similar with upstream pipeline ', tags$b('"Inter-Type Communication"'), '.
-             '
-           ),
-           
-           p(style = 'word-break:break-word',
-             '
-             添加CellCall描述
-             '
-           ),
-           
-           p(style = 'word-break:break-word',
-             '
-             添加CellChat描述
              '
            ),
            

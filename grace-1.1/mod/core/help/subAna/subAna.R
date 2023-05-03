@@ -2,7 +2,7 @@
 subAna.help <- fluidPage(
   fixedRow(
     column(width = 11,
-           h3('Subclustering analysis'), br(),
+           h3('Subclustering Snalysis'), br(),
            
            p(style = 'word-break:break-word',
              '

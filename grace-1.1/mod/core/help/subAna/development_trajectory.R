@@ -13,18 +13,12 @@ development_trajectory.help <- fluidPage(
              '
            ),
            
-           p(style = 'word-break:break-word',
-             '
-             这里需要添加SPRING的描述
-             '
-           ),
-           
            hr(),
            
            tags$ul(
              tags$li(tags$b('Pseudotime Layout'), br(),
                      
-                     br(), h5('使用Monocle2进行Pseudotime分析'), br(),
+                     br(), h5('Trajectory analysis using Monocle2'), br(),
                      
                      tags$ol(
                        ####
@@ -48,7 +42,7 @@ development_trajectory.help <- fluidPage(
              
              tags$li(tags$b('Force-directed Layout'), br(),
                      
-                     br(), h5('使用SPRING进行Force-directed trajectory分析'), br(),
+                     br(), h5('Trajectory analysis using SPRING'), br(),
                      
                      br(),
                      tags$ol(

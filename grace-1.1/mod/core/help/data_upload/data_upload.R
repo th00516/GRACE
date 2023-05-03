@@ -2,7 +2,7 @@
 data_upload.help <- fluidPage(
   fixedRow(
     column(width = 11,
-           h3('Data upload'), br(),
+           h3('Data Upload'), br(),
            
            p(style = 'word-break:break-word',
              '

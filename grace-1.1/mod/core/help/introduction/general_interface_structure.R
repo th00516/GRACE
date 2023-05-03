@@ -2,7 +2,7 @@
 general_interface_structure.help <- fluidPage(
   fixedRow(
     column(width = 11,
-           h3('General Interface structure'), br(),
+           h3('General Interface Structure'), br(),
            
            p(style = 'word-break:break-word',
              '

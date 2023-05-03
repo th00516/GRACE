@@ -46,18 +46,18 @@ core.help.UI <- fluidPage(
     
     tabPanel('Inter-type communication', br(),
              navlistPanel(widths = c(4, 8), well = T,
-                          tabPanel('Inter-type communication', itComm.help),
+                          tabPanel('Inter-type Communication', itComm.help),
              )
     ),
     
     tabPanel('Subclustering analysis', br(),
              navlistPanel(widths = c(4, 8), well = T,
-                          tabPanel('Subclustering analysis', subAna.help),
+                          tabPanel('Subclustering Analysis', subAna.help),
                           tabPanel('Defined Subcluster', defined_subcluster.help),
                           tabPanel('Subcluster Manual Annotation', subcluster_manual_annotation.help),
                           tabPanel('Development Trajectory', development_trajectory.help),
                           tabPanel('Pathway Enrichment', pathway_enrichment.help),
-                          tabPanel('Intra-type communication', intra_type_communication.help),
+                          tabPanel('Intra-type Communication', intra_type_communication.help),
              )
     )
   )
