@@ -145,7 +145,7 @@ options(BioC_mirror="https://mirrors.tuna.tsinghua.edu.cn/bioconductor")\
 
     #### fix up monocle2 ####
     rm -rf /root/miniconda3/lib/R/library/monocle && \
-    wget https://bioconductor.org/packages/release/bioc/src/contrib/monocle_2.26.0.tar.gz && \
+    wget https://bioconductor.org/packages/3.16/bioc/src/contrib/monocle_2.26.0.tar.gz && \
     tar zxf monocle_2.26.0.tar.gz && \
     sed -i s/if\(class\(projection\)/#if\(class\(projection\)/ monocle/R/order_cells.R && \
     R CMD INSTALL monocle && \
